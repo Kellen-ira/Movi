@@ -1,15 +1,19 @@
-import { StyleSheet, Text, View ,ImageBackground} from 'react-native'
+import { StyleSheet, Text, View ,ImageBackground, Pressable} from 'react-native'
 import React from 'react'
+import PostSFetch from '../Action'
 
-const Inputcomp = ({image,Title}) => {
+const Inputcomp = ({image,Title, navigation, screen}) => {
+  const handlPress=()=>{
+    navigation.navigate(screen)
+  }
   return (
-    <View style={{width:250,height:200,padding:5}}>
+    <Pressable style={{width:250,height:200,padding:5}} onPress={handlPress}>
       <ImageBackground source={{ uri: `https://image.tmdb.org/t/p/w500${image}` }} style={{width:250,height:150}}>
         <View style={{display:'flex',alignItems:'flex-end'}}>
        <Text style={{backgroundColor:'yellow',width:40}}>{Title}</Text>
        </View>
         </ImageBackground>
-    </View>
+    </Pressable>
   )
 }
 

@@ -3,6 +3,7 @@ import { ImageBackground, StyleSheet, Text, View,TouchableOpacity,Dimensions,Ima
 const height=Dimensions.get('screen').height;
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Foundation from 'react-native-vector-icons/Foundation';
+import PostSFetch1 from './Action';
 
 //import Icon from 'react-native-elements';
                     
@@ -16,7 +17,7 @@ import Popular from './Popular';
 import React, { useEffect, useState } from 'react'
 
 const fullHeight=Dimensions.get('screen').height
-export default function PostSFetch()
+export default function PostSFetch({navigation})
 
 {
 
@@ -115,6 +116,7 @@ export default function PostSFetch()
              return (
               <Inputcomp image={item.poster_path} 
                          Title={item.vote_average}
+                         navigation={navigation} screen={'Action'}
               />
             )
           }}

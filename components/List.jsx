@@ -3,7 +3,7 @@ import React from 'react'
 
 const List = ({image,Title,Icon,votecount}) => {
   return (
-    <View style={{width:250,height:200,paddingTop:20 ,display:'flex',flexDirection:'row',gap:20}}>
+    <View style={{width:250,height:200,paddingTop:20,display:'flex',flexDirection:'row' ,gap:20}}>
       <ImageBackground source={{ uri: `https://image.tmdb.org/t/p/w500${image}` }} style={{width:250,height:150}}>
       
      
@@ -11,11 +11,14 @@ const List = ({image,Title,Icon,votecount}) => {
         </ImageBackground>
       
      
-        <Text style={{color:'white',fontSize:17}}>{Title}</Text>
         <View>
+          <Text style={{color:'white',fontSize:17,marginBottom:20}}>{Title}</Text>
+        
+          
         <Text style={{color:'white',fontSize:15}}>{votecount}</Text>
         </View>
-    </View>
+        </View>
+    
 
   )
 }

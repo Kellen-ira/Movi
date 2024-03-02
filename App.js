@@ -23,7 +23,7 @@ const Tab= createBottomTabNavigator();
 const StackNavigation = ()=>{   
   return(
 
-<Stack.Navigator initialRouteName='Edit'>
+<Stack.Navigator initialRouteName='movi'>
 <Stack.Screen
   name="movi"
   component={Movi}
