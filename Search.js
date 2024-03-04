@@ -63,9 +63,16 @@ textColor='white'
                     data={search}
                     renderItem={({item }) =>
                     
-                    <><TouchableHighlight>
-                        <Imgcomp img={item.poster_path} title_movie={item.original_title} />
-                        </TouchableHighlight></>}
+                    <>
+                    <TouchableHighlight onPress={()=>navigation.navigate('Action',item)}>
+
+                        <Imgcomp img={item.poster_path}
+                                 title_movie={item.original_title}
+                                 votecount={item.vote_count}
+                                  />
+                        </TouchableHighlight>
+                        </>
+                        }
                     keyExtractor={(item, index) => index.toString()}
                 />
             </View>

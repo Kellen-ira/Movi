@@ -59,7 +59,7 @@ export default function PostSFetch({navigation})
 
   return(
     <View>
-      <ScrollView >
+      <ScrollView  showsHorizontalScrollIndicator={false}>
 <View style={{backgroundColor:"#1f2123",paddingTop:20,display:'flex',flexDirection:'row',justifyContent:'space-between'}}>
 <Image source={require('../Movi/assets/logo.jpg')} style={{width:117,paddingLeft:50}}/>
 <View style={{display:'flex',flexDirection:'row'}}>

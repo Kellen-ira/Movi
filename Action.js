@@ -2,11 +2,17 @@ import { View, Text ,Image, TouchableOpacity,FlatList, ScrollView} from 'react-n
 import React, { useEffect, useState } from 'react';
 import { Icon } from 'react-native-elements';
 import ActionImage from './components/ActionImage';
+import YoutubeIframe from 'react-native-youtube-iframe';
+
+export default function PostSFetch({route})
 
 
-export default function PostSFetch({navigation})
 
 {
+
+const movie = route.params
+console.log(route.params)
+const [VideoPlay,setVideoPlay] = useState('')
 
   const [post, setPost] = useState([])
   const options = {
@@ -27,24 +33,31 @@ export default function PostSFetch({navigation})
 
   const [post2, setPost2] = useState([])
   
-  fetch('https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1', options)
+  
+  fetch(`https://api.themoviedb.org/3/movie/${movie.id}/videos?language=en-US`, options)
+
   .then(response => response.json())
-  .then(response => setPost2(response.results))
+  .then(response => {setVideoPlay(response.results[0].key)})
   .catch(err => console.error(err));
   useEffect(()=>{
   })  
 
   return (
     <View>
-      <ScrollView>
+      <ScrollView showsHorizontalScrollIndicator={false}>
     <View style={{backgroundColor:'#26282c',paddingLeft:20}}>
       
-      <Image source={require('./assets/asx.jpeg')} style={{width:370,height:180}}/>
+      {/* <Image source={{ uri: `https://image.tmdb.org/t/p/w500${movie.poster_path}` }} style={{width:370,height:180}}/> */}
+      <YoutubeIframe
+      height={300}
+      //play={playing}
+      videoId={VideoPlay}
+      
+      />
     </View>
-    <View style={{backgroundColor:'#26282c',paddingLeft:20,paddingTop:20}}>
-        <Text style={{color:"#fff",fontSize:20}}>Jumanji:The Next Level</Text>
-        <Text style={{color:"#fff",fontSize:16}}>When The World is under attack from creatures</Text>
-        <Text style={{color:"#fff",fontSize:16}}>Who hunt their human prey by sound, a teenager</Text>
+    <View style={{backgroundColor:'#26282c',paddingLeft:20}}>
+        <Text style={{color:"#fff",fontSize:20}}>{movie.title}</Text>
+        <Text style={{color:"#fff",fontSize:16}}>{movie.overview}</Text>
     </View>
     <View style={{backgroundColor:'#26282c',paddingLeft:18,paddingTop:20,display:'flex',flexDirection:'row',gap:20}}>
       
