@@ -47,6 +47,7 @@ const Search = ({navigation}) => {
 <Text style={{color:'white',fontWeight:'bold',fontSize:20,paddingBottom:20}}>Search</Text>
 </View>
 <View style={{backgroundColor:'#26282c',display:'flex',height:700}}>
+  <View style={{display:'flex',flexDirection:'row',alignItems:'flex-end',width:720}}>
 <TextInput
 textColor='white'
   placeholder={'Type Title,Categories,Years,etc'}
@@ -56,8 +57,16 @@ textColor='white'
   style={{backgroundColor:'#26282c'}}
   background={'#26282c'}
   name={'search'}
+
+  right={<TextInput.Icon 
+    icon={'magnify'}
+    size={30}
+    color={'yellow'}
+/>} 
+
   />
-  
+
+  </View>
      <View>
                 <FlatList
                     data={search}

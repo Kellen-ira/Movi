@@ -45,8 +45,14 @@ export default function Edit({navigation}) {
      placeholder='Irakoze Kellen'
      style={{backgroundColor:'#26282c',marginBottom:20}}
      color='white'
+     
+  right={<TextInput.Icon 
+    icon={'account'}
+    size={30}
+    color={'yellow'}
+/>} 
     />
-    <Icon name='account' type='material-community' color='yellow' style={{}}/>
+    {/* <Icon name='account' type='material-community' color='yellow' style={{}}/> */}
     </View> 
       
       
@@ -57,9 +63,15 @@ export default function Edit({navigation}) {
      placeholder='ikellen2016@gmail.com'
      style={{backgroundColor:'#26282c',color:'#fff',marginBottom:20}}
      color='white'
+      
+     right={<TextInput.Icon 
+        icon={'email'}
+        size={30}
+        color={'yellow'}
+    />}
      
     />
-    <Icon name='email' color='yellow' style={{}}/>
+    {/* <Icon name='email' color='yellow' style={{}}/> */}
     </View>
     
     <Text style={{color:'#fff',paddingLeft:20}}>Phone Number</Text>
@@ -68,9 +80,14 @@ export default function Edit({navigation}) {
     textColor='white'
      placeholder='+250785634'
      style={{backgroundColor:'#26282c',color:'#fff',marginBottom:150,width:300}}
-
+     
+     right={<TextInput.Icon 
+        icon={'phone'}
+        size={30}
+        color={'yellow'}
+    />}
     />
-     <Icon name='phone' color='yellow' style={{}}/>
+     {/* <Icon name='phone' color='yellow' style={{}}/> */}
     </View>
     <TouchableOpacity style={{borderWidth:1,padding:10,borderRadius:5,backgroundColor:'yellow'}}>
         <Text style={{textAlign:'center'}}>Save</Text>

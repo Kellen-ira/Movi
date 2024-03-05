@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, StyleSheet, Text, View,TouchableOpacity,Dimensions,Image,Pressable, ScrollView,FlatList} from 'react-native';
+import { ImageBackground, StyleSheet, Text, View,TouchableOpacity,Dimensions,Image,Pressable, ScrollView,FlatList, TouchableHighlight} from 'react-native';
 const height=Dimensions.get('screen').height;
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Foundation from 'react-native-vector-icons/Foundation';
@@ -103,21 +103,31 @@ export default function PostSFetch({navigation})
         horizontal={true}
           
           data={posts}
-          keyExtractor={item => {
+          keyExtractor={item =>{
             return item.id
           }}
           ItemSeparatorComponent={() => {
             return <View style={{width: 20}}/>
           }}
-          renderItem={post => {
+          renderItem={post =>
+            
+             {
             const item = post.item 
 
             // console.log(item.poster_path);
              return (
-              <Inputcomp image={item.poster_path} 
+              <>
+            
+            <Inputcomp image={item.poster_path} 
                          Title={item.vote_average}
-                         navigation={navigation} screen={'Action'}
+                         handlPress={()=>navigation.navigate('Action',item)}
+                        
               />
+            
+            
+            </>
+            
+              
             )
           }}
         />
@@ -146,10 +156,18 @@ export default function PostSFetch({navigation})
 
             // console.log(item.poster_path);
              return (
+              <>
+              <TouchableHighlight onPress={()=>navigation.navigate('Action',item)}>
+
+            
+
               <Inputcomp image={item.poster_path} 
                          Title={item.id}
               />
+              </TouchableHighlight>
+              </>
             )
+
           }}
         />
         <ScrollView horizontal style={{}}>
@@ -178,6 +196,7 @@ export default function PostSFetch({navigation})
 
             // console.log(item.poster_path);
              return (
+              
               <Popular image={item.poster_path}  />
             )
           }}

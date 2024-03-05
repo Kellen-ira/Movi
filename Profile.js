@@ -8,7 +8,7 @@ import {Icon} from 'react-native-elements';
 //import { Image } from '@rneui/base';
 
 const image=require('./assets/k.jpg')
-export default function Profile(navigation) {
+export default function Profile({navigation}) {
 
     const array=[
        { id:1,
@@ -39,7 +39,7 @@ export default function Profile(navigation) {
 <Text style={{color:'white',textAlign:'center',color:'gray'}}>ikellen2016@gmail.com</Text>
 </View>
 <View>
-    <Pressable>
+    <Pressable onPress={()=>navigation.navigate('Edit')}>
 <Text style={{color:'yellow',textAlign:'center',paddingTop:10}}>Edit Profile</Text>
 </Pressable>
     </View>
