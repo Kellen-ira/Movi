@@ -3,10 +3,15 @@ import { ImageBackground, StyleSheet, Text, View,TouchableOpacity,Dimensions,Ima
 const height=Dimensions.get('screen').height;
 import AntDesign from 'react-native-vector-icons/AntDesign';
 //import { Icon } from "react-native-elements";
-import { TextInput,Checkbox,Icon} from "react-native-paper";
+import { TextInput,Checkbox,Icon, Button} from "react-native-paper";
 import React,{useState} from 'react';
 import { Input } from './Input';
+import { FIREBASE_AUTH } from './firebaseconfig';
 import FlashMessage from "react-native-flash-message";
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { showMessage, hideMessage } from "react-native-flash-message";
+
 export default function Sign({navigation}) 
 {
 
@@ -14,6 +19,12 @@ const[email,setEmail]=useState('')
 const[password,setPassword]=useState('')
 const[emailError,setEmailError]=useState('')
 const[passwordError,setPasswordError]=useState('')
+
+
+const auth = FIREBASE_AUTH
+
+const[security,setSecurity]= useState(true)
+
 
 const validateForm=()=>{
   let valid =true
@@ -37,13 +48,42 @@ if (!email.trim()) {
 
 return valid
 }
-const handleSubmit = () => {
+
+const handleSubmit = async() => {
   if (validateForm()) {
-      // Perform form submission
-      navigation.navigate("HomePage")
-      console.log('Form submitted:', email, password)
+    const data = {
+      email:email,
+      password:password
+    }
+    console.log(email)
+    console.log(password)
+    // await AsyncStorage.setItem('user_data',JSON.stringify(data))
+    // // Perform form submission
+    //  navigation.navigate('HomePage')
+      
+    //   console.log('Form submitted:', email, password)
+try{
+  const response = await signInWithEmailAndPassword(auth,email,password)
+  console.log(response)
+  console.log('you are now signed in')
+  
+  navigation.navigate('HomePage')
+}
+catch (error){
+console.log(error)
+showMessage({
+  message:error.code.toString(),
+  type:"danger",
+  icon:"danger"
+ }) 
+}     
   }
 }
+
+
+
+
+
 const isValidEmail = (email) => {
   // Basic email validation regex
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -51,6 +91,7 @@ const isValidEmail = (email) => {
 }
   return(
 <View>
+  <FlashMessage position="top" />
 <View style={{backgroundColor:'#26282c',display:'flex',paddingTop:30,height:700,paddingLeft:30,borderWidth:1}}>
   <Text style={{color:'#9d9fa3'}}>Email Address</Text>
   <Input 
@@ -61,20 +102,26 @@ const isValidEmail = (email) => {
   value={email}
   onChangeText={setEmail}
   error={!!emailError}
+  textColor='white'
 
   />
      {emailError ? <Text style={styles.error}>{emailError}</Text> : null}
 
    <Text style={{color:'#9d9fa3'}}>Password</Text>
   <Input
+
   placeholder={'Your Password'}
-  secureTextEntry={true}
+  secureTextEntry={security}
   mode={'outlined'}
   background={'#26282c'}
   IconName={'lock-outline'}
   value={password}
   onChangeText={setPassword}
   error={!!passwordError}
+  IconName2={security? 'eye-off' :'eye'}
+
+  hidden={()=>{setSecurity(!security)}}
+
 />
 {passwordError ? <Text style={styles.error}>{passwordError}</Text> : null}
    
@@ -113,7 +160,7 @@ const isValidEmail = (email) => {
         </TouchableOpacity>
 </View>
 </View>
-<FlashMessage position="top" />
+
 </View>
   )}
 

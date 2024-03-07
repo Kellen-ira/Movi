@@ -13,8 +13,9 @@ import { Input } from './Input';
 import { color } from '@rneui/base';
 import Inputcomp from './components/Inputcomp';
 import Popular from './Popular';
-
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect, useState } from 'react'
+
 
 const fullHeight=Dimensions.get('screen').height
 export default function PostSFetch({navigation})
@@ -56,6 +57,17 @@ export default function PostSFetch({navigation})
   .catch(err => console.error(err));
   useEffect(()=>{
   })  
+  
+
+   const getData = async () => {
+    let data = await AsyncStorage.getItem('user_data')
+    console.log(data);
+   }
+    
+    useEffect(()=>{
+      getData()
+    },[])
+
 
   return(
     <View>

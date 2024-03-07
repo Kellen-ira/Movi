@@ -4,9 +4,15 @@ const height=Dimensions.get('screen').height;
 import AntDesign from 'react-native-vector-icons/AntDesign';
 //import { Icon } from "react-native-elements";
 import { TextInput,Checkbox,Icon} from "react-native-paper";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import React,{useState} from 'react';
 import { Input } from './Input';
+import { FIREBASE_AUTH } from './firebaseconfig';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import FlashMessage from "react-native-flash-message";
+
+import { showMessage, hideMessage } from "react-native-flash-message";
+
 export default function Signup({navigation}) 
 {
 
@@ -14,6 +20,8 @@ const[email,setEmail]=useState('')
 const[password,setPassword]=useState('')
 const[emailError,setEmailError]=useState('')
 const[passwordError,setPasswordError]=useState('')
+
+const auth = FIREBASE_AUTH
 
 const validateForm=()=>{
   let valid =true
@@ -37,11 +45,39 @@ if (!email.trim()) {
 
 return valid
 }
-const handleSubmit = () => {
+const handleSubmit = async () => {
   if (validateForm()) {
-      // Perform form submission
-      navigation.navigate("signin")
-      console.log('Form submitted:', email, password)
+
+    const data = {
+      email:email,
+      password:password
+    }
+    console.log(email)
+    console.log(password)
+
+      // // Perform form submission
+      // navigation.navigate("signin")
+      // console.log('Form submitted:', email, password)
+
+try{
+  const response = await createUserWithEmailAndPassword(auth,email,password)
+  
+  console.log(response)
+  console.log('you are now signUp')
+  navigation.navigate('signin')
+}
+
+catch(error){
+  console.log(error)
+  showMessage({
+    message:error.code.toString(),
+    type:"danger",
+    icon:"danger"
+   }) 
+  
+
+}
+
   }
 }
 const isValidEmail = (email) => {
@@ -54,16 +90,16 @@ const isValidEmail = (email) => {
 
 return(
 <View>
-<View style={{backgroundColor:"#1f2123",paddingLeft:50,paddingTop:30,paddingBottom:20,display:'flex',flexDirection:'row',gap:25}}>
-<AntDesign name="arrowleft" size={24} color="black" style={{color:'white'}} />
+<FlashMessage position="top" />
+<View style={{backgroundColor:"#1f2123",paddingLeft:50,paddingBottom:20,display:'flex',flexDirection:'row',gap:25}}>
 
-<Text style={{color:'white',fontWeight:'bold',fontSize:20}}>Sign Up</Text>
 </View>
 <View style={{backgroundColor:'#26282c',display:'flex',paddingTop:30,height:700,paddingLeft:30}}>
     
     <View style={{paddingTop:2}}>
     <Text style={{color:'#9d9fa3'}}>Email Address</Text>
   <Input 
+  
   placeholder={'ikellen2016@gmail.com'}
   mode={'outlined'}
   IconName='email-outline'
@@ -77,6 +113,7 @@ return(
 
    <Text style={{color:'#9d9fa3'}}>Phone Number</Text>
   <Input
+  
   placeholder={'0888845555999'}
   
   mode={'outlined'}
@@ -85,6 +122,7 @@ return(
 />
   <Text style={{color:'#9d9fa3'}}>Birth Date</Text>
   <Input 
+  
   placeholder={'10/12/1995'}
   mode={'outlined'}
   IconName='calendar-blank-outline'
@@ -93,6 +131,7 @@ return(
   />
    <Text style={{color:'#9d9fa3'}}>Gender</Text>
   <Input
+  
   placeholder={'Female'}
   
   mode={'outlined'}
@@ -103,6 +142,7 @@ return(
   />
   <Text style={{color:'#9d9fa3'}}>Password</Text>
    <Input
+   
   placeholder={'Your Password'}
   secureTextEntry={true}
   mode={'outlined'}
@@ -116,6 +156,7 @@ return(
 
   <Text style={{color:'#9d9fa3'}}>Password</Text>
    <Input
+   
   placeholder={'Your Password'}
   secureTextEntry={true}
   mode={'outlined'}

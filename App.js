@@ -10,7 +10,7 @@ import Search from './Search.js';
 import Profile from './Profile.js';
 import List from './MyList.js';
 import Action from './Action.js';
-import Edit from './EditProfile.js';
+import EditProfile from './EditProfile.js';
  import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
@@ -23,12 +23,10 @@ const Tab= createBottomTabNavigator();
 const StackNavigation = ()=>{   
   return(
 
-<Stack.Navigator initialRouteName='Edit'>
-<Stack.Screen
-  name="movi"
-  component={Movi}
-  options={{headerShown:false}}
-/>
+<Stack.Navigator initialRouteName='signup'>
+
+
+<Stack.Screen name="movi" component={Movi} options={{headerShown:false}}/>
 <Stack.Screen name="screen" component={Screen1} options={{headerShown:false}} />
 
 <Stack.Screen name="screen2" component={Screen2} options={{headerShown:false}} />
@@ -36,10 +34,10 @@ const StackNavigation = ()=>{
 <Stack.Screen name="signup" component={Signup} options={{headerStyle:{backgroundColor:'#1f2123'},headerTintColor:'white',headerBackTitleVisible:null}} />
 <Stack.Screen name="HomePage" component={TabNavigator} options={{headerStyle:{backgroundColor:'#1f2123'},headerTintColor:'white',headerBackTitleVisible:null}} />
 <Stack.Screen name="Search" component={Search} options={{headerShown:false}} /> 
- <Stack.Screen name="Profile" component={Profile} options={{headerShown:false}} />  
+ <Stack.Screen name="Profile" component={Profile} options={{headerStyle:{backgroundColor:'#1f2123'},headerTintColor:'white',headerBackTitleVisible:null}} />  
  <Stack.Screen name="List" component={List} options={{headerShown:false}} />
- <Stack.Screen name="Action" component={Action}options={{headerStyle:{backgroundColor:'#1f2123'},headerTintColor:'white',headerBackTitleVisible:null}}/>
- <Stack.Screen name="Edit" component={Edit}options={{headerShown:false}}/>
+ <Stack.Screen name="Action" component={Action} options={{headerStyle:{backgroundColor:'#1f2123'},headerTintColor:'white',headerBackTitleVisible:null}}/>
+ <Stack.Screen name="EditProfile" component={EditProfile} options={{headerStyle:{backgroundColor:'#1f2123'},headerTintColor:'white',headerBackTitleVisible:null}}/>
 </Stack.Navigator>
   )
 

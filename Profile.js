@@ -5,46 +5,38 @@ import Bottoms from './components/Bottoms.jsx';
 import { TextInput,Checkbox} from "react-native-paper";
 import Imagecomp from './components/Imagecomp.jsx';
 import {Icon} from 'react-native-elements';
+import EditProfile from './EditProfile.js';
 //import { Image } from '@rneui/base';
 
 const image=require('./assets/k.jpg')
 export default function Profile({navigation}) {
 
-    const array=[
-       { id:1,
-        image:image
-       }
-    ]
+    
  return (
 
-    <View>
+    <View style={{backgroundColor:"#1f2123",height:800}}>
 
 <View style={{backgroundColor:"#1f2123",paddingLeft:50,paddingTop:30,paddingBottom:20,display:'flex',flexDirection:'row',gap:25}}>
 
 <Text style={{color:'white',fontWeight:'bold',fontSize:20}}>More</Text>
 </View> 
+<View style={{paddingLeft:140,backgroundColor:"#1f2123",paddingTop:10}}>
+    <Image source={require('./assets/k.jpg')} style={{width:150,height:150}}/>
+</View>
        
-<View style={{backgroundColor:'#26282c',display:'flex',paddingTop:5,height:290,paddingLeft:10}}>
-    {
-        array.map((item,index)=>{
-            return(
-                <View key={index}><Imagecomp
-                image={item.image}
-                /></View>
-            )
-        })
-    }
+<View style={{backgroundColor:'#1f2123',display:'flex',paddingTop:5,paddingLeft:10}}>
+    
 <View>
 <Text style={{color:'white',textAlign:'center',fontSize:20,paddingTop:-10}}>Kellen IRAKOZE</Text>
 <Text style={{color:'white',textAlign:'center',color:'gray'}}>ikellen2016@gmail.com</Text>
 </View>
 <View>
-    <Pressable onPress={()=>navigation.navigate('Edit')}>
+    <Pressable onPress={()=>navigation.navigate("EditProfile")}>
 <Text style={{color:'yellow',textAlign:'center',paddingTop:10}}>Edit Profile</Text>
 </Pressable>
     </View>
 </View>
-<View style={{backgroundColor:'#2c3038',display:'flex',paddingTop:5,height:500,paddingLeft:10}}>
+<View style={{backgroundColor:'#1f2123',display:'flex',paddingTop:25,height:100,paddingLeft:5}}>
     <View style={{display:'flex',flexDirection:'row',color:'white',marginBottom:15,paddingLeft:20,gap:25}}> 
    <Icon 
    name='inbox'
@@ -77,7 +69,7 @@ export default function Profile({navigation}) {
         <Text style={{color:'gray',fontSize:16,marginBottom:15}}>Term & Condition</Text>
         <Text style={{color:'gray',fontSize:16,marginBottom:60}}>Privacy & Policy</Text>
     </View> 
-    <View style={{paddingLeft:15}}>
+    <View style={{paddingLeft:15,marginBottom:10}}>
         <TouchableOpacity style={{borderWidth:1,borderRadius:5,padding:10,borderColor:'gray',width:360}}>
             <Text style={{color:'red',textAlign:'center'}}>Log Out</Text>
         </TouchableOpacity>
